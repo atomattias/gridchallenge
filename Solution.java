@@ -1,4 +1,3 @@
-package largestGridProduct;
 
 import java.util.*;
 public class Solution {
