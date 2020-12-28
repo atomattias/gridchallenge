@@ -25,29 +25,29 @@ public class GridSolution {
             "01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48";
     int[][] mat = new int[gridSize][gridSize];
 	
-    //Find the consecutive two digit numbers in four direction.
+    //Find consecutive four two digit numbers in four direction.
     public void consecutiveFourNumbers(int mat[][]) {
         
         for (int i = 0 ; i < gridSize ; i++){
         	for (int j = 0 ; j < gridSize ; j++){
         		
         	   
-        	   //left to right
+        	   //left to right (excluding the last three column)
         		if (i < 17){
         			calculate(mat[i][j] ,mat[i+1][j] ,mat[i+2][j] ,mat[i+3][j]);
         			
         		}
-        	   //top down
+        	   //top down (excluding the last three rows)
         		if (j < 17){
         			calculate(mat[i][j],mat[i][j+1] ,mat[i][j+2] ,mat[i][j+3]);
         			
         		}
-        	   //diagonal
+        	   //diagonal (excluding the last three rows and last three column)
         		if (j < 17 && i < 17){
         			calculate(mat[i][j],mat[i+1][j+1], mat[i+2][j+2], mat[i+3][j+3]);
         			
         		}
-        		//anti diagonal
+        	   //anti diagonal (excluding the first three column and last three rows)
         		if (i < 17 && j > 2){
         			calculate(mat[i][j], mat[i+1][j-1], mat[i+2][j-2], mat[i+3][j-3]);
         			
@@ -56,7 +56,7 @@ public class GridSolution {
         }
     }
     
-   // multiply the four two digit number and compare with the max available
+   // multiply the four two digit numbers and compare the result with the max available
    public void calculate(int n1, int n2, int n3, int n4){
         long product = n1 *  n2 *  n3 * n4;
         if (product>max) max  = product;
@@ -77,13 +77,16 @@ public class GridSolution {
     
     //Print the final answer
     static void disp(){
-    	System.out.format("Max Product = %d", + max);
+    	System.out.format("The possible Max Product = %d", + max);
     }
     	
     public static void main(String[] args) {
         GridSolution solution = new GridSolution();  
+	//Read the variable in to array
         solution.scanToMatrice();
+	//compute the multiplication
         solution.consecutiveFourNumbers(solution.mat);
+	//show the maximum product
         disp();
         
     }
